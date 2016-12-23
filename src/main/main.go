@@ -13,9 +13,9 @@ import (
 
 //Todo implements a new Todo type
 type Todo struct {
-	Name      string
-	Completed bool
-	Due       time.Time
+	Name      string    `json:"name"`
+	Completed bool      `json:"completed"`
+	Due       time.Time `json:"due"`
 }
 
 //Todos implements a type of array of Todo
