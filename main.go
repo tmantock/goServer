@@ -12,7 +12,7 @@ type Product struct {
 	Slug        string
 	Description string
 }
-
+//Create a catalog of VR products slice of Products
 var products = []Product{
     Product{Id: 1, Name: "Hover Shooters", Slug: "hover-shooters", Description : "Shoot your way to the top on 14 different hoverboards"},
     Product{Id: 2, Name: "Ocean Explorer", Slug: "ocean-explorer", Description : "Explore the depths of the sea in this one of a kind underwater experience"},
