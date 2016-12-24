@@ -44,3 +44,9 @@ func main() {
 func NotImplemented (w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Not implemented"))
 }
+
+//StatusHandler will be inkoked when a user makes a GETY request to the /products endpoint
+//it will return a list of products for the user to review
+func StatusHandler (w http.ResponseWriter, r *http.Request) {
+    w.Write([]byte("API is up and running"))
+}
