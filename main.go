@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"github.com/dgrijalva/jwt-go"
 	"net/http"
 	"os"
 )
@@ -24,7 +25,9 @@ var products = []Product{
 	Product{Id: 4, Name: "Cars VR", Slug: "cars-vr", Description: "Get behind the wheel of the fastest cars in the world."},
 	Product{Id: 5, Name: "Robin Hood", Slug: "robin-hood", Description: "Pick up the bow and arrow and master the art of archery"},
 	Product{Id: 6, Name: "Real World VR", Slug: "real-world-vr", Description: "Explore the seven wonders of the world in VR"},
-}
+
+
+const mySigninKey = []byte("secret")
 
 func main() {
 	//Initialize mux router
@@ -38,6 +41,8 @@ func main() {
 	r.HandleFunc("/products", ProductsHandler).Methods("GET")
 	//Producst/{slug}/feedback route will capture user feedback on products
 	r.HandleFunc("/products/{slug}/feedback", AddFeedbackHandler).Methods("POST")
+	//token route for handling request for new tokens
+	r.HandleFunc("/get-token", GetTokenHandler).Methods("GET")
 	//Serve statics assets from the /static/{file} route
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 	//run the application on port 3000
@@ -87,4 +92,13 @@ func AddFeedbackHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.Write([]byte("Product Not Found"))
 	}
+}
+
+//GetTokenHandler handles requests for tokens
+func GetTokenHandler (w http.ResponseWriter, r *http.Request) {
+	//Create the token
+	token := jwt.New(jwt.SigningMethodHS256)
+
+	//Set the token claims
+	token.Claims
 }
